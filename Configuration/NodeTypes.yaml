@@ -1,0 +1,244 @@
+# If you need more than just the "main" content area you can
+# uncomment the snippet below. It will add a "sidebar" area
+# to your pages. You can add as many areas as you like, still
+# only those that are rendered in your TypoScript and Template
+# are visible on your page.
+---
+#'TYPO3.Neos.NodeTypes:Page':
+#  childNodes:
+#    sidebar:
+#      type: 'TYPO3.Neos:ContentCollection'
+
+'Inspiring.WorkshopPage:Section':
+  superTypes: ['TYPO3.Neos:Content']
+  ui:
+    label: 'Content Section'
+    icon: 'icon-columns'
+    inlineEditable: true
+    inspector:
+      groups:
+        style:
+          label: 'Style'
+          position: 10
+  childNodes:
+    content:
+      type: 'TYPO3.Neos:ContentCollection'
+  properties:
+    background:
+      type: string
+      defaultValue: 'white'
+      ui:
+        label: 'Background Color'
+        reloadIfChanged: true
+        inspector:
+          group: style
+          editor: 'TYPO3.Neos/Inspector/Editors/SelectBoxEditor'
+          editorOptions:
+            placeholder: 'Select Background Color'
+            values:
+              'white':
+                label: 'White'
+              'beige-bg':
+                label: 'Beige'
+              'brown-bg':
+                label: 'Brown'
+    border:
+      type: string
+      defaultValue: ''
+      ui:
+        label: 'Border'
+        reloadIfChanged: true
+        inspector:
+          group: style
+          editor: 'TYPO3.Neos/Inspector/Editors/SelectBoxEditor'
+          editorOptions:
+            placeholder: 'Select Borders'
+            values:
+              '':
+                label: 'No Border'
+              'border-top':
+                label: 'Border Top'
+              'border-top-simple':
+                label: 'Simple Border Top'
+    centered:
+      type: boolean
+      ui:
+        label: 'Center?'
+        reloadIfChanged: true
+        inspector:
+          group: style
+    nopadding:
+      type: boolean
+      ui:
+        label: 'No Padding?'
+        reloadIfChanged: true
+        inspector:
+          group: style
+
+
+'Inspiring.WorkshopPage:Teaser':
+  superTypes: ['TYPO3.Neos.NodeTypes:Headline', 'TYPO3.Neos.NodeTypes:Text']
+  ui:
+    label: 'Teaser'
+    icon: 'icon-file-text'
+    inspector:
+      groups:
+        style:
+          label: 'Style'
+          position: 10
+  properties:
+    title:
+      defaultValue: '<h2>Enter headline here</h2>'
+      ui:
+        aloha:
+          format:
+            h1: FALSE
+            h4: TRUE
+            h5: TRUE
+            h6: TRUE
+    icon:
+      type: string
+      defaultValue: ''
+      ui:
+        label: 'Icon'
+        reloadIfChanged: true
+        inspector:
+          group: style
+          editor: 'TYPO3.Neos/Inspector/Editors/SelectBoxEditor'
+          editorOptions:
+            placeholder: 'Select Icon'
+            values:
+              '':
+                label: ''
+              'icon-pacman':
+                label: 'PACMAN!'
+              'icon-user':
+                label: 'User'
+              'icon-headphones':
+                label: 'Headphones'
+    linktext:
+      type: string
+      defaultValue: 'Link here'
+      ui:
+        inlineEditable: true
+    link:
+      type: reference
+      ui:
+        label: 'Link Target'
+        inspector:
+          group: style
+
+'Inspiring.WorkshopPage:PostList':
+  superTypes: ['TYPO3.Neos:Content']
+  ui:
+    label: 'Blog Post List'
+    icon: 'icon-pacman'
+
+
+##
+# A "Carousel" content element that renders "Image" child nodes into a JavaScript based slideshow
+#
+'Inspiring.WorkshopPage:Carousel':
+  superTypes: ['TYPO3.Neos:Content']
+  childNodes:
+    carouselItems:
+      type: 'TYPO3.Neos:ContentCollection'
+  ui:
+    label: 'Carousel'
+    group: 'plugins'
+    icon: 'icon-picture'
+    inlineEditable: TRUE
+
+
+'Inspiring.WorkshopPage:BlogPost':
+  superTypes: ['TYPO3.Neos.NodeTypes:Page']
+  ui:
+    label: 'Blog Post'
+    icon: 'icon-pacman'
+  properties:
+    teaser:
+      type: string
+      defaultValue: 'Teaser Text'
+      ui:
+        inlineEditable: true
+
+'TYPO3.Neos.NodeTypes:Page':
+  ui:
+    inspector:
+      groups:
+        image:
+          label: 'Image'
+          position: 20
+  properties:
+    headerimage:
+     type: TYPO3\Media\Domain\Model\ImageVariant
+     ui:
+      label: 'Header Image'
+      reloadIfChanged: true
+      inspector:
+        group: image
+
+##
+# Adjust the "TwoColumn" node type:
+# Disable some of the layout options, override labels and set the default layout
+#
+'TYPO3.Neos.NodeTypes:TwoColumn':
+  properties:
+    'layout':
+      defaultValue: '6-6'
+      ui:
+        inspector:
+          editorOptions:
+            values:
+              '50-50': ~
+              '75-25': ~
+              '25-75': ~
+              '66-33': ~
+              '33-66': ~
+              '6-6':
+                label: '50% / 50%'
+              '8-4':
+                label: '66% / 33%'
+              '4-8':
+                label: '33% / 66%'
+
+##
+# Adjust the "ThreeColumn" node type:
+# Disable some of the layout options, override labels and set the default layout
+#
+'TYPO3.Neos.NodeTypes:ThreeColumn':
+  properties:
+    'layout':
+      defaultValue: '4-4-4'
+      ui:
+        inspector:
+          editorOptions:
+            values:
+              '33-33-33': ~
+              '50-25-25': ~
+              '25-50-25': ~
+              '25-25-50': ~
+              '4-4-4':
+                label: '33% / 33% / 33%'
+              '6-3-3':
+                label: '50% / 25% / 25%'
+              '3-6-3':
+                label: '25% / 50% / 25%'
+              '3-3-6':
+                label: '25% / 25% / 50%'
+
+##
+# Adjust the "FourColumn" node type:
+# Disable some of the layout options, override labels and set the default layout
+#
+'TYPO3.Neos.NodeTypes:FourColumn':
+  properties:
+    'layout':
+      defaultValue: '3-3-3-3'
+      ui:
+        inspector:
+          editorOptions:
+            values:
+              '25-25-25-25': ~
+              '3-3-3-3':
+                label: '25% / 25% / 25% / 25%'

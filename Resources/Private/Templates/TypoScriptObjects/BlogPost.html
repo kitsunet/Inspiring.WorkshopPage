@@ -1,0 +1,11 @@
+{namespace neos=TYPO3\Neos\ViewHelpers}
+{namespace media=TYPO3\Media\ViewHelpers}
+<div class="article-list-element">
+	<media:image asset="{headerimage}" alt="{title}" maximumHeight="465" />
+
+	<h2>{title}</h2>
+
+	{neos:contentElement.editable(property: 'teaser')}
+
+	<p><neos:link.node node="{node}" class="btn btn-default">Details about this</neos:link.node></p>
+</div>

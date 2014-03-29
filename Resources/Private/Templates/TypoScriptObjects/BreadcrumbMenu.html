@@ -1,0 +1,19 @@
+{namespace neos=TYPO3\Neos\ViewHelpers}
+<f:if condition="{items}">
+	<ol class="breadcrumb">
+	<f:for each="{items}" as="item" reverse="TRUE" iteration="breadcrumbIteration">
+		<f:if condition="{item.hiddenInIndex} == 0">
+			<li>
+				<f:if condition="{breadcrumbIteration.isLast}">
+					<f:then>
+						{item.label}
+					</f:then>
+					<f:else>
+						<neos:link.node node="{item}">{item.label}</neos:link.node>
+					</f:else>
+				</f:if>
+			</li>
+		</f:if>
+	</f:for>
+	</ol>
+</f:if>
